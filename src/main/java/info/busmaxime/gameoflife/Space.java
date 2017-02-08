@@ -55,6 +55,30 @@ public class Space {
                 leftNeighbor(x, y), cornerTopLeftNeighbor(x, y)};
     }
 
+    public void computeNewSpace() {
+        Cell[][] newState = new Cell[maxRowsZeroBased + 1][maxColumnsZeroBased + 1];
+
+        for (int i = 0; i <= this.getMaxRowsZeroBased(); i++) {
+            for (int j = 0; j <= this.getMaxColumnsZeroBased(); j++) {
+                newState[i][j] = GameOfLife.getNewCellFromNeighbors(this.state[i][j], getNeighbors(i, j));
+            }
+        }
+
+        this.state = newState;
+    }
+
+    public Cell[][] getState() {
+        return state;
+    }
+
+    public int getMaxRowsZeroBased() {
+        return maxRowsZeroBased;
+    }
+
+    public int getMaxColumnsZeroBased() {
+        return maxColumnsZeroBased;
+    }
+
     private boolean isBottomEdge(int x, int y) {
         return (x > 0 && x < this.maxRowsZeroBased) && y == this.maxRowsZeroBased;
     }
@@ -118,29 +142,4 @@ public class Space {
     private Cell cornerBottomLeftNeighbor(int x, int y) {
         return this.state[x - 1][y + 1];
     }
-
-    public Cell[][] getState() {
-        return state;
-    }
-
-    public int getMaxRowsZeroBased() {
-        return maxRowsZeroBased;
-    }
-
-    public int getMaxColumnsZeroBased() {
-        return maxColumnsZeroBased;
-    }
-
-    public void computeNewSpace() {
-        Cell[][] newState = new Cell[maxRowsZeroBased + 1][maxColumnsZeroBased + 1];
-
-        for (int i = 0; i <= this.getMaxRowsZeroBased(); i++) {
-            for (int j = 0; j <= this.getMaxColumnsZeroBased(); j++) {
-                newState[i][j] = GameOfLife.getNewCellFromNeighbors(this.state[i][j], getNeighbors(i, j));
-            }
-        }
-
-        this.state = newState;
-    }
-
 }

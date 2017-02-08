@@ -11,7 +11,6 @@ public class Main extends AbstractGameLoop {
     private Space space = new Space(Main.randomize(100, 100));
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
         new Main().run();
     }
 
@@ -48,11 +47,11 @@ public class Main extends AbstractGameLoop {
     @Override
     public void draw() {
         renderer.draw(this.space);
-//        try {
-//            Thread.sleep(100);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         space.computeNewSpace();
     }
 

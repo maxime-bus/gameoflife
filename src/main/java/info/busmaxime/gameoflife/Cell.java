@@ -20,10 +20,6 @@ public class Cell {
         return alive;
     }
 
-    public boolean isDead() {
-        return !alive;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

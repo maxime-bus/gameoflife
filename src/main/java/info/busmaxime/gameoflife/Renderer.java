@@ -33,19 +33,15 @@ public class Renderer {
 
                     GL11.glColor3f(1f, 1f, 1f);
 
-                } else {
-                    GL11.glColor3f(0f, 0f, 0f);
+                    GL11.glBegin(GL11.GL_QUADS);
+                    GL11.glVertex2f((column * 5), (row * 5));
+                    GL11.glVertex2f((column * 5), (row * 5) + 5);
+                    GL11.glVertex2f((column * 5) + 5, (row * 5) + 5);
+                    GL11.glVertex2f((column * 5) + 5, (row * 5));
+                    GL11.glEnd();
                 }
-
-                GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f((column * 5), (row * 5));
-                GL11.glVertex2f((column * 5), (row * 5) + 5);
-                GL11.glVertex2f((column * 5) + 5, (row * 5) + 5);
-                GL11.glVertex2f((column * 5) + 5, (row * 5));
-                GL11.glEnd();
             }
         }
-
 
         Display.update();
     }
