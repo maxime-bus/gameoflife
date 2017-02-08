@@ -142,4 +142,8 @@ public class Space {
     private Cell cornerBottomLeftNeighbor(int x, int y) {
         return this.state[x - 1][y + 1];
     }
+
+    public void setState(Cell[][] state) {
+        this.state = state;
+    }
 }

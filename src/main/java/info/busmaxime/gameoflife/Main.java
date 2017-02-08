@@ -1,5 +1,6 @@
 package info.busmaxime.gameoflife;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import java.io.IOException;
@@ -41,7 +42,13 @@ public class Main extends AbstractGameLoop {
 
     @Override
     public void update(long delta) throws InterruptedException {
-
+        if (Keyboard.next()) {
+            if (Keyboard.getEventKeyState()) {
+                if (Keyboard.getEventCharacter() == 'r') {
+                    space.setState(Main.randomize(100, 100));
+                }
+            }
+        }
     }
 
     @Override
