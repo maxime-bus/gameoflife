@@ -2,21 +2,21 @@ package info.busmaxime.gameoflife;
 
 public class GameOfLife {
 
-    public static boolean shouldStayAlive(Boolean isCellAlive, boolean[] neighbors) {
+    public static Cell getNewCellFromNeighbors(Cell cell, Cell[] neighbors) {
         int numberOfNeighorsAlive = 0;
 
-        for (boolean neighbor : neighbors) {
-            if (neighbor) numberOfNeighorsAlive++;
+        for (Cell neighbor : neighbors) {
+            if (neighbor.isAlive()) numberOfNeighorsAlive++;
         }
 
         if (numberOfNeighorsAlive == 3) {
-            return true;
+            return Cell.livingCell();
         }
 
-        if (isCellAlive && numberOfNeighorsAlive == 2) {
-            return true;
+        if (cell.isAlive() && numberOfNeighorsAlive == 2) {
+            return Cell.livingCell();
         }
 
-        return false;
+        return Cell.deadCell();
     }
 }

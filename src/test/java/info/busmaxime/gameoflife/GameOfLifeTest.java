@@ -2,6 +2,8 @@ package info.busmaxime.gameoflife;
 
 import org.junit.Test;
 
+import static info.busmaxime.gameoflife.Cell.deadCell;
+import static info.busmaxime.gameoflife.Cell.livingCell;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -18,54 +20,46 @@ public class GameOfLifeTest {
 
     @Test
     public void a_living_cell_with_no_neighbor_must_die() throws Exception {
+        Cell[] neighbors = new Cell[]{deadCell(), deadCell(), deadCell(), deadCell()};
 
-        boolean livingCell = true;
-        boolean[] neighbors = new boolean[]{false, false, false, false};
-
-        assertThat(GameOfLife.shouldStayAlive(livingCell, neighbors)).isEqualTo(false);
+        assertThat(GameOfLife.getNewCellFromNeighbors(livingCell(), neighbors)).isEqualTo(deadCell());
     }
 
     @Test
     public void a_living_cell_with_two_neighbors_must_stay_alive() throws Exception {
+        Cell[] neighbors = new Cell[]{livingCell(), deadCell(), livingCell(), deadCell()};
 
-        boolean livingCell = true;
-        boolean[] neighbors = new boolean[]{true, false, true, false};
-
-        assertThat(GameOfLife.shouldStayAlive(livingCell, neighbors)).isEqualTo(true);
+        assertThat(GameOfLife.getNewCellFromNeighbors(livingCell(), neighbors)).isEqualTo(livingCell());
     }
 
     @Test
     public void a_living_cell_with_three_neighbors_must_stay_alive() throws Exception {
+        Cell[] neighbors = new Cell[]{livingCell(), livingCell(), livingCell(), deadCell()};
 
-        boolean livingCell = true;
-        boolean[] neighbors = new boolean[]{true, true, true, false};
-
-        assertThat(GameOfLife.shouldStayAlive(livingCell, neighbors)).isEqualTo(true);
+        assertThat(GameOfLife.getNewCellFromNeighbors(livingCell(), neighbors)).isEqualTo(livingCell());
     }
 
     @Test
     public void a_dead_cell_with_three_neighbors_brings_back_to_life() throws Exception {
-        boolean deadCell = false;
-        boolean[] neighbors = new boolean[]{true, true, true, false};
+        Cell[] neighbors = new Cell[]{livingCell(), livingCell(), livingCell(), deadCell()};
 
-        assertThat(GameOfLife.shouldStayAlive(deadCell, neighbors)).isEqualTo(true);
+        assertThat(GameOfLife.getNewCellFromNeighbors(deadCell(), neighbors)).isEqualTo(livingCell());
     }
 
     @Test
     public void a_dead_cell_with_other_than_three_neighbors_remains_dead() throws Exception {
 
-        boolean deadCell = false;
-        boolean[] noNeighbor = new boolean[]{false, false, false, false};
-        boolean[] oneNeighbor = new boolean[]{true, false, false, false};
-        boolean[] twoNeighbors = new boolean[]{true, false, true, false};
-        boolean[] threeNeighbors = new boolean[]{true, true, true, false};
-        boolean[] fourNeighbors = new boolean[]{true, true, true, true};
+        Cell[] noNeighbor = new Cell[]{deadCell(), deadCell(), deadCell(), deadCell()};
+        Cell[] oneNeighbor = new Cell[]{livingCell(), deadCell(), deadCell(), deadCell()};
+        Cell[] twoNeighbors = new Cell[]{livingCell(), deadCell(), livingCell(), deadCell()};
+        Cell[] threeNeighbors = new Cell[]{livingCell(), livingCell(), livingCell(), deadCell()};
+        Cell[] fourNeighbors = new Cell[]{livingCell(), livingCell(), livingCell(), livingCell()};
 
-        assertThat(GameOfLife.shouldStayAlive(deadCell, noNeighbor)).as("No neighbor").isEqualTo(false);
-        assertThat(GameOfLife.shouldStayAlive(deadCell, oneNeighbor)).as("One neighbor").isEqualTo(false);
-        assertThat(GameOfLife.shouldStayAlive(deadCell, twoNeighbors)).as("Two neighbors").isEqualTo(false);
-        assertThat(GameOfLife.shouldStayAlive(deadCell, threeNeighbors)).as("Three neighbors").isEqualTo(true);
-        assertThat(GameOfLife.shouldStayAlive(deadCell, fourNeighbors)).as("Four neighbors").isEqualTo(false);
+        assertThat(GameOfLife.getNewCellFromNeighbors(deadCell(), noNeighbor)).as("No neighbor").isEqualTo(deadCell());
+        assertThat(GameOfLife.getNewCellFromNeighbors(deadCell(), oneNeighbor)).as("One neighbor").isEqualTo(deadCell());
+        assertThat(GameOfLife.getNewCellFromNeighbors(deadCell(), twoNeighbors)).as("Two neighbors").isEqualTo(deadCell());
+        assertThat(GameOfLife.getNewCellFromNeighbors(deadCell(), threeNeighbors)).as("Three neighbors").isEqualTo(livingCell());
+        assertThat(GameOfLife.getNewCellFromNeighbors(deadCell(), fourNeighbors)).as("Four neighbors").isEqualTo(deadCell());
     }
 
 }

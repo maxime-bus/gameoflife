@@ -9,18 +9,6 @@ public class Main extends AbstractGameLoop {
 
     private Renderer renderer = new Renderer();
     private Space space = new Space(Main.randomize(100, 100));
-//    private Space space = new Space(new boolean[][]{
-//            {false, false, false, false, false, false, false, false, false, false},
-//            {false, false, false, false, false, false, false, false, false, false},
-//            {false, false, false, false, false, false, false, false, false, false},
-//            {false, false, false, false, true, false, false, false, false, false},
-//            {false, false, false, false, false, true, false, false, false, false},
-//            {false, false, false, true, true, true, false, false, false, false},
-//            {false, false, false, false, false, false, false, false, false, false},
-//            {false, false, false, false, false, false, false, false, false, false},
-//            {false, false, false, false, false, false, false, false, false, false},
-//            {false, false, false, false, false, false, false, false, false, false}
-//    });
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -28,14 +16,14 @@ public class Main extends AbstractGameLoop {
     }
 
 
-    public static boolean[][] randomize(int rows, int columns) {
+    public static Cell[][] randomize(int rows, int columns) {
         Random random = new Random();
 
-        boolean[][] space = new boolean[rows][columns];
+        Cell[][] space = new Cell[rows][columns];
 
         for (int i = 0; i < space.length; i++) {
             for (int j = 0; j < space[i].length; j++) {
-                space[i][j] = random.nextBoolean();
+                space[i][j] = random.nextBoolean() ? Cell.livingCell() : Cell.deadCell();
             }
         }
 
@@ -60,11 +48,11 @@ public class Main extends AbstractGameLoop {
     @Override
     public void draw() {
         renderer.draw(this.space);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         space.computeNewSpace();
     }
 
