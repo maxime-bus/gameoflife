@@ -31,7 +31,7 @@ public class Renderer {
             for (int column = 0; column <= space.getMaxColumnsZeroBased(); column++) {
                 if (cells[row][column].isAlive()) {
 
-                    GL11.glColor3f(1f, 1f, 1f);
+                    GL11.glColor3f(1f, (float) row / (float) space.getMaxRowsZeroBased(), (float) column / (float) space.getMaxColumnsZeroBased());
 
                     GL11.glBegin(GL11.GL_QUADS);
                     GL11.glVertex2f((column * 5), (row * 5));
