@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.busmaxime.tictactoe.infrastructure.lwjgl.LwjglGame</mainClass>
+                            <mainClass>info.busmaxime.gameoflife.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -36,15 +36,6 @@
                     </descriptorRefs>
                     <finalName>gameoflife</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
                 </configuration>
             </plugin>
             <plugin>
